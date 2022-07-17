@@ -33,6 +33,7 @@ const MainRoutes = () => {
           />
         ))}
         <Route path="*" element={() => <h1>404</h1>} />
+        <Route path="/" element={<Navigate replace to={"/chat"} />} />
       </Routes>
     </MainLayout>
   );

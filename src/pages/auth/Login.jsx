@@ -34,8 +34,11 @@ const Login = () => {
         type: userTypes.Login,
         payload: data.user,
       });
-      console.log(data);
-      navigate("/chat/setAvatar");
+      if (data.user.user.avatar) {
+        navigate("/chat");
+      } else {
+        navigate("/chat/setAvatar");
+      }
     } catch (error) {
       console.log(error);
     }

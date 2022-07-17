@@ -27,6 +27,7 @@ const initialState = () => {
 export const userTypes = {
   Login: "Login",
   SET_AVATAR: "SET_AVATAR",
+  LOGOUT: "LOGOUT",
 };
 
 /* ========================================================================== */
@@ -48,7 +49,11 @@ const userReducer = (state, { type, payload }) => {
           avatar: payload,
         },
       };
-
+    case userTypes.LOGOUT:
+      return {
+        user: {},
+        isLogin: false,
+      };
     default:
       return state;
   }

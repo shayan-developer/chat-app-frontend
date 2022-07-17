@@ -5,14 +5,16 @@ import { ToastContainer } from "react-toastify";
 import theme from "theme";
 import "react-toastify/dist/ReactToastify.css";
 import { UserProvider } from "context";
+import { SocketProvider } from "context/socketCtx";
 function App() {
-  
   return (
     <div className="App">
       <Router>
         <ThemeProvider theme={theme}>
           <UserProvider>
-            <MainRoutes />
+            <SocketProvider>
+              <MainRoutes />
+            </SocketProvider>
           </UserProvider>
         </ThemeProvider>
         <ToastContainer theme="dark" position="bottom-right" autoClose={8000} />

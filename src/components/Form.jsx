@@ -2,7 +2,7 @@ import React from "react";
 import { validateAndSet } from "utils";
 import { FormHelperText } from "@mui/material";
 
-const Form = ({ children, onFinish }) => {
+const Form = ({ children, onFinish,...rest }) => {
   const [form, setForm] = React.useState({});
   const [errors, setErrors] = React.useState({});
  
@@ -16,7 +16,7 @@ const Form = ({ children, onFinish }) => {
   };
 
   return (
-    <form autoComplete="off" onSubmit={onFinishHand}>{children(onChangeHand, errors, form)}</form>
+    <form autoComplete="off" onSubmit={onFinishHand} {...rest}>{children(onChangeHand, errors, form)}</form>
   );
 };
 

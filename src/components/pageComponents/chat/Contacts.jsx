@@ -6,7 +6,7 @@ import useAsync from "hooks/useAsync";
 import { getContactsReq } from "services/chat.api";
 
 const Container = styled("div")(({ theme }) => ({
-  padding: "1rem",
+  padding: "0.5rem",
   ...theme.centerCol,
 }));
 
