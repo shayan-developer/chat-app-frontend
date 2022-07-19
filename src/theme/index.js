@@ -4,23 +4,37 @@ import { red } from "@mui/material/colors";
 // Create a theme instance.
 const theme = createTheme({
   spacing: (value) => value * 4,
-  centerCol:{
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundImage: `url(/bg/1.jpg)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          fontFamily: '"Poppins", sans-serif',
+        },
+      },
+    },
+  },
+  centerCol: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
-    gap:'1rem'
+    gap: "1rem",
   },
-  center:{
+  center: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    gap:'1rem'
+    gap: "1rem",
   },
   palette: {
     primary: {
       main: "#800080",
       green: "#008000",
+      red: "#ff0000",
       light: "#fff",
     },
     error: {
@@ -40,17 +54,17 @@ const theme = createTheme({
       fontSize: "2.5rem",
       fontWeight: 700,
     },
-    h4:{
+    h4: {
       fontSize: "1.7rem",
-      fontWeight:700,
+      fontWeight: 700,
     },
-    h5:{
+    h5: {
       fontSize: "1.2rem",
       fontWeight: 700,
     },
-    body:{
+    body: {
       fontSize: "0.8rem",
-    }
+    },
   },
   shape: {
     borderRadius: 4,

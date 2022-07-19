@@ -10,7 +10,7 @@ const MainLayout = ({ children }) => {
           height: "100vh",
           ...t.centerCol,
           width: 1,
-          py:8
+          py:8,
         })}
       >
         {children}

@@ -1,5 +1,5 @@
 import React from "react";
-import { styled, experimental_sx as sx } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 
 const GlassesDiv = styled("div", {
   shouldForwardProp: (prop) => prop !== "fullView",

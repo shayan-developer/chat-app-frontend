@@ -1,9 +1,12 @@
 import React, { useLayoutEffect } from "react";
-import { styled, experimental_sx as sx } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Picker from "emoji-picker-react";
 import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import SendIcon from "@mui/icons-material/Send";
 import { IconButton, InputAdornment, OutlinedInput } from "@mui/material";
+import useCtxValues from "context";
+import { useSocket } from "context/socketCtx";
+import { orderIds } from "utils";
 
 const ChatInputWrapper = styled("div")({
   padding: "1rem",
@@ -13,14 +16,32 @@ const ChatInputWrapper = styled("div")({
   position: "relative",
 });
 
-const ChatInput = () => {
+const ChatInput = ({ chat }) => {
   const [showEmojiPicker, setShowEmojiPicker] = React.useState(false);
   const [message, setMessage] = React.useState("");
 
+  const [state] = useCtxValues();
+  const socket = useSocket();
+  const { user } = state;
   const handleShowEmojiPicker = (e) => {
-    e.stopPropagation()
+    e.stopPropagation();
     setShowEmojiPicker(!showEmojiPicker);
   };
+
+  function getFormattedDate() {
+    const date = new Date();
+    const year = date.getFullYear();
+    let month = (1 + date.getMonth()).toString();
+
+    month = month.length > 1 ? month : "0" + month;
+    let day = date.getDate().toString();
+
+    day = day.length > 1 ? day : "0" + day;
+
+    return month + "/" + day + "/" + year;
+  }
+
+  const todayDate = getFormattedDate();
 
   useLayoutEffect(() => {
     const clickout = (e) => {
@@ -34,14 +55,20 @@ const ChatInput = () => {
   }, []);
 
   const onEmojiClick = (e, emojiObject) => {
-    e.stopPropagation()
+    e.stopPropagation();
     const { emoji } = emojiObject;
     const newMessage = `${message}${emoji}`;
     setMessage(newMessage);
   };
 
   const onFinish = () => {
-    console.log(message);
+    const today = new Date();
+    const minutes =
+      today.getMinutes() < 10 ? "0" + today.getMinutes() : today.getMinutes();
+    const time = today.getHours() + ":" + minutes;
+    const orderId = orderIds(user.id, chat._id);
+    socket.emit("message-room", orderId, message, user, time, todayDate);
+    setMessage("");
   };
 
   return (

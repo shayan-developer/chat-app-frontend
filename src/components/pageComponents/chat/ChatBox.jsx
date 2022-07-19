@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ChatBoxHeader from "./ChatBoxHeader";
 import ChatInput from "./ChatInput";
 import ChatMessages from "./ChatMessages";
-import { styled, experimental_sx as sx } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 
 
 const ChatBoxWrapper = styled("div")({
@@ -16,7 +16,7 @@ const ChatBox = ({ chat }) => {
     <ChatBoxWrapper>
       <ChatBoxHeader chat={chat} />
       <ChatMessages/>
-      <ChatInput />
+      <ChatInput chat={chat}/>
     </ChatBoxWrapper>
   );
 };

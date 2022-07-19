@@ -1,7 +1,7 @@
-import { CircularProgress, Grid } from "@mui/material";
-import useCtxValues from "context";
+import { Grid } from "@mui/material";
+import useCtxValues, { userTypes } from "context";
 import { styled, experimental_sx as sx } from "@mui/material/styles";
-import React from "react";
+import React, { useCallback } from "react";
 import GlassBox from "components/GlassBox";
 import {
   ChatBox,
@@ -9,6 +9,8 @@ import {
   Header,
   Welcome,
 } from "components/pageComponents/chat";
+import { useSocket } from "context/socketCtx";
+import { orderIds } from "utils";
 
 const ContainerChat = styled("div")(
   sx((theme) => ({
@@ -19,17 +21,24 @@ const ContainerChat = styled("div")(
 
 const Chat = () => {
   const [state, dispatch] = useCtxValues();
+  const socket = useSocket();
 
   const [tabs, setTabs] = React.useState(0);
   const [currentChat, setCurrentChat] = React.useState(null);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = useCallback((event, newValue) => {
     setTabs(newValue);
-  };
+  }, []);
 
-  const handleSelect = (contact) => {
+  const handleSelect = useCallback((contact) => {
     setCurrentChat(contact);
-  };
+    const orderId = orderIds(state.user.id, contact._id);
+    socket.emit("join-room", orderId);
+    dispatch({
+      type: userTypes.REMOVE_NOTIFICATION,
+      payload: orderId,
+    });
+  }, []);
 
   return (
     <ContainerChat>
@@ -37,17 +46,9 @@ const Chat = () => {
         {/* /* -------------------------------- left side ------------------------------- */}
         <Grid item xs={4} sx={{ height: 1 }}>
           <GlassBox fullView>
-            <Header
-              user={state.user}
-              handChangeTab={handleChange}
-              tabs={tabs}
-            />
+            <Header handChangeTab={handleChange} tabs={tabs} />
 
-            <Contacts
-              state={state}
-              handleSelect={handleSelect}
-              currentChat={currentChat}
-            />
+            <Contacts handleSelect={handleSelect} currentChat={currentChat} />
           </GlassBox>
         </Grid>
 

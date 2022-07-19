@@ -7,6 +7,7 @@ import { loginReq, registerReq } from "services/auth.api";
 import AuthLayout from "Layouts/Auth.layout";
 import { useNavigate } from "react-router-dom";
 import useCtxValues, { userTypes } from "context";
+import { useSocket } from "context/socketCtx";
 
 const inputForms = [
   {
@@ -26,6 +27,7 @@ const inputForms = [
 const Login = () => {
   const navigate = useNavigate();
   const [, dispatch] = useCtxValues();
+  const socket = useSocket();
 
   const onFinish = async (form) => {
     try {
@@ -34,7 +36,9 @@ const Login = () => {
         type: userTypes.Login,
         payload: data.user,
       });
-      if (data.user.user.avatar) {
+      console.log(data);
+      socket.emit("new-user", data.user.id);
+      if (data.user.avatar) {
         navigate("/chat");
       } else {
         navigate("/chat/setAvatar");

@@ -6,6 +6,7 @@ import Button from "components/Button";
 import { registerReq } from "services/auth.api";
 import AuthLayout from "Layouts/Auth.layout";
 import { useNavigate } from "react-router-dom";
+import useCtxValues, { userTypes } from "context";
 
 const inputForms = [
   {
@@ -36,10 +37,15 @@ const inputForms = [
 
 const Register = () => {
   const navigate = useNavigate();
+  const [, dispatch] = useCtxValues();
 
   const onFinish = async (form) => {
     try {
       const data = await registerReq(form);
+      dispatch({
+        type: userTypes.Login,
+        payload: data.user,
+      });
       navigate("/chat/setAvatar");
     } catch (error) {
       console.log(error);

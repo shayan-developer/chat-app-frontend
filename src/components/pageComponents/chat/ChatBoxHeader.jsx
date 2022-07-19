@@ -1,5 +1,5 @@
 import React from "react";
-import { styled, experimental_sx as sx } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import { Avatar, Box, Typography } from "@mui/material";
 
 const DivStyled = styled("div")(({ theme }) => ({
@@ -23,9 +23,14 @@ const ChatBoxHeader = ({ chat }) => {
       />
       <Box component={"div"} >
         <Typography variant="h5">{chat.userName}</Typography>
-        <Typography variant="body" sx={{ color: "primary.green" }}>
-          online
-        </Typography>
+        <Typography
+            variant="body"
+            sx={{
+              color: chat.status === "Online" ? "primary.green" : "primary.red",
+            }}
+          >
+            {chat.status}
+          </Typography>
       </Box>
     </DivStyled>
   );

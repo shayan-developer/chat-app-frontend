@@ -6,12 +6,17 @@ import IconButton from "@mui/material/IconButton";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Avatar, Box, Divider, Tab, Tabs, Typography } from "@mui/material";
 import useCtxValues, { userTypes } from "context";
+import { useSocket } from "context/socketCtx";
 
-const Header = ({ user, handChangeTab, tabs }) => {
-  const [, dispatch] = useCtxValues();
+const Header = ({handChangeTab, tabs }) => {
+  const [state, dispatch] = useCtxValues();
+  const {user}=state
+
+  const socket = useSocket();
 
   const logoutHand = () => {
     dispatch({ type: userTypes.LOGOUT });
+    socket.emit("logout", user.id);
   };
 
   return (
@@ -20,6 +25,7 @@ const Header = ({ user, handChangeTab, tabs }) => {
       sx={(t) => ({
         ...t.centerCol,
         width: 1,
+        height: "30%",
         p: 2,
         backgroundColor: "#fff",
       })}
@@ -80,4 +86,4 @@ const Header = ({ user, handChangeTab, tabs }) => {
   );
 };
 
-export default Header;
+export default React.memo(Header) ;
