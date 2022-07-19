@@ -14,6 +14,10 @@ const ChatInputWrapper = styled("div")({
   display: "flex",
   gap: "1rem",
   position: "relative",
+  "@media (max-width:900px)": {
+    padding: "0.7rem",
+    gap: "0.7rem",
+  },
 });
 
 const ChatInput = ({ chat }) => {
@@ -80,7 +84,7 @@ const ChatInput = ({ chat }) => {
         />
       )}
 
-      <IconButton color="primary" onClick={handleShowEmojiPicker}>
+      <IconButton color="primary" onClick={handleShowEmojiPicker} sx={{p:0}}>
         <EmojiEmotionsIcon />
       </IconButton>
       <div style={{ width: "100%" }}>

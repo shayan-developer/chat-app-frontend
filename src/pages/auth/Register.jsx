@@ -7,6 +7,7 @@ import { registerReq } from "services/auth.api";
 import AuthLayout from "Layouts/Auth.layout";
 import { useNavigate } from "react-router-dom";
 import useCtxValues, { userTypes } from "context";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const inputForms = [
   {
@@ -38,6 +39,7 @@ const inputForms = [
 const Register = () => {
   const navigate = useNavigate();
   const [, dispatch] = useCtxValues();
+  const matches = useMediaQuery("(max-width:900px)");
 
   const onFinish = async (form) => {
     try {
@@ -72,13 +74,23 @@ const Register = () => {
                         fontSize: "0.9rem !important",
                       },
                     }}
+                    size={matches ? "small" : "large"}
                   />
                   <MyFormHelperText>
                     {errors[input.name] ? errors[input.name] : ""}
                   </MyFormHelperText>
                 </FormControl>
               ))}
-              <Button sx={{ mt: 10 }} size="large" type="submit">
+              <Button
+                sx={{
+                  mt: 10,
+                  "@media (max-width:900px)": {
+                    mt:6
+                  },
+                }}
+                size="large"
+                type="submit"
+              >
                 Register
               </Button>
             </>

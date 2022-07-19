@@ -44,6 +44,10 @@ const MessageItem = styled("div", {
     fontFamily: "Poppins",
     fontSize: "0.7rem",
   },
+  "@media (max-width:900px)": {
+    maxWidth:"70%",
+
+  },
 }));
 
 const ChatMessages = () => {

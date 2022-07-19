@@ -1,4 +1,10 @@
-import { Avatar, Box, CircularProgress, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  CircularProgress,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useEffect } from "react";
 
 import { styled } from "@mui/material/styles";
@@ -7,6 +13,7 @@ import { getContactsReq } from "services/chat.api";
 import { useSocket } from "context/socketCtx";
 import useCtxValues, { userTypes } from "context";
 import { orderIds } from "utils";
+import { Link } from "react-router-dom";
 
 const Container = styled("div")(({ theme }) => ({
   padding: "0.5rem",
@@ -39,6 +46,7 @@ const ContactBox = styled("div", {
 const Contacts = ({ handleSelect, currentChat }) => {
   const { run, value: contacts, loading } = useAsync(getContactsReq);
   const [state, dispatch] = useCtxValues();
+  const matches = useMediaQuery("(max-width:900px)");
 
   const [globalContacts, setGlobalContacts] = React.useState([]);
   console.log(globalContacts);
@@ -139,18 +147,27 @@ const Contacts = ({ handleSelect, currentChat }) => {
         >
           Global Contacts
         </Typography>
-        {globalContacts?.map((contact) => (
-          <ContactItem
-            key={contact.userName}
-            contact={contact}
-            onClick={handleSelect.bind(null, contact)}
-            isSelect={currentChat?.userName === contact.userName}
-            notifications={
-              state?.notifications?.[orderIds(state.user.id, contact._id)]
-            }
-            status={contact.status}
-          />
-        ))}
+        {globalContacts?.map((contact) => {
+          if (state.user.id === contact._id) return null;
+          return (
+            <Link
+              state={contact}
+              to={matches ? "mobileVer" : "#"}
+              key={contact.userName}
+              style={{width: "100%"}}
+            >
+              <ContactItem
+                contact={contact}
+                onClick={handleSelect.bind(null, contact)}
+                isSelect={currentChat?.userName === contact.userName}
+                notifications={
+                  state?.notifications?.[orderIds(state.user.id, contact._id)]
+                }
+                status={contact.status}
+              />
+            </Link>
+          );
+        })}
       </Container>
     </Box>
   );

@@ -3,11 +3,12 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import { FormControl } from "@mui/material";
 import Button from "components/Button";
-import { loginReq, registerReq } from "services/auth.api";
+import { loginReq} from "services/auth.api";
 import AuthLayout from "Layouts/Auth.layout";
 import { useNavigate } from "react-router-dom";
 import useCtxValues, { userTypes } from "context";
 import { useSocket } from "context/socketCtx";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const inputForms = [
   {
@@ -28,7 +29,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [, dispatch] = useCtxValues();
   const socket = useSocket();
-
+  const matches = useMediaQuery('(max-width:900px)');
   const onFinish = async (form) => {
     try {
       const data = await loginReq(form);
@@ -67,6 +68,7 @@ const Login = () => {
                         fontSize: "0.9rem !important",
                       },
                     }}
+                    size={matches ? "small" : "large"}
                   />
                   <MyFormHelperText>
                     {errors[input.name] ? errors[input.name] : ""}

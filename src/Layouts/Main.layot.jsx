@@ -11,6 +11,9 @@ const MainLayout = ({ children }) => {
           ...t.centerCol,
           width: 1,
           py:8,
+          "@media (max-width:900px)": {
+            py:4,
+          },
         })}
       >
         {children}

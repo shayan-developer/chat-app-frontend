@@ -11,6 +11,11 @@ const GlassesDiv = styled("div", {
     width: fullView ? "100%" : "75%",
     borderRadius: ".5rem",
     overflow: "hidden",
+    '@media (max-width:900px)': {
+      width: "100%",
+      height: "100%",
+
+    },
   };
 });
 

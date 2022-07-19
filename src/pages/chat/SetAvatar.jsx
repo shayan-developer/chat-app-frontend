@@ -30,7 +30,6 @@ const SetAvatar = () => {
   const [state, dispatch] = useCtxValues();
   const navigate = useNavigate();
 
-
   const handleNext = async () => {
     if (!selectedAvatar) {
       toast.error("Please select an avatar");
@@ -70,7 +69,7 @@ const SetAvatar = () => {
         <Typography variant="h4" sx={{ color: "#fff" }}>
           Pick an avatar for your account
         </Typography>
-        <Stack direction={"row"} spacing={6} mt={6}>
+        <Stack direction={"row"} mt={6} spacing={{ xs: 2, sm: 3, md: 6 }} justifyContent="center" flexWrap={"wrap"} gap={"1rem"}>
           {avatars.length ? (
             avatars?.map((avatar) => (
               <Avatar
@@ -95,14 +94,31 @@ const SetAvatar = () => {
         </Stack>
         <Button
           size="large"
-          sx={{ width: "50%", mt: 6 }}
+          sx={{
+            width: "50%",
+            mt: 6,
+            "@media (max-width:900px)": {
+              width: "90%",
+              mt: 4,
+            },
+          }}
           onClick={() => {
             setUpdate(!update);
           }}
         >
           generate another avatars
         </Button>
-        <Button sx={{ width: "50%" }} size="large" onClick={handleNext}>
+        <Button
+          sx={{
+            width: "50%",
+
+            "@media (max-width:900px)": {
+              width: "90%",
+            },
+          }}
+          size="large"
+          onClick={handleNext}
+        >
           Next
         </Button>
       </ContainerBox>
