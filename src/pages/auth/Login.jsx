@@ -59,7 +59,7 @@ const Login = () => {
                   <TextField
                     {...input}
                     onChange={onChangeHand.bind(input.type, this)}
-                    value={form[input.name]}
+                    value={form[input.name]??""}
                     required
                     autoComplete="off"
                     error={!!errors[input.name]}

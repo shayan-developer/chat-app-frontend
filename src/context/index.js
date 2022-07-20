@@ -18,6 +18,7 @@ const initialState = () => {
     user: {},
     isLogin: false,
     notifications: {},
+    theme: "theme",
   };
 };
 
@@ -31,6 +32,7 @@ export const userTypes = {
   LOGOUT: "LOGOUT",
   ADD_NOTIFICATION: "ADD_NOTIFICATION",
   REMOVE_NOTIFICATION: "REMOVE_NOTIFICATION",
+  CHANGE_THEME: "CHANGE_THEME",
 };
 
 /* ========================================================================== */
@@ -41,6 +43,7 @@ const userReducer = (state, { type, payload }) => {
   switch (type) {
     case userTypes.Login:
       return {
+        ...state,
         user: payload,
         isLogin: true,
       };
@@ -56,6 +59,8 @@ const userReducer = (state, { type, payload }) => {
       return {
         user: {},
         isLogin: false,
+        notifications: {},
+        theme: "theme",
       };
     case userTypes.ADD_NOTIFICATION:
       let notif;
@@ -75,6 +80,8 @@ const userReducer = (state, { type, payload }) => {
       let newState = { ...state };
       delete newState?.notifications?.[payload];
       return newState;
+    case userTypes.CHANGE_THEME:
+      return { ...state, theme: payload };
     default:
       return state;
   }

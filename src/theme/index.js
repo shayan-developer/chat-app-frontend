@@ -45,7 +45,6 @@ const theme = createTheme({
     h1: {
       fontSize: "70px",
       fontWeight: 100,
-     
     },
     h2: {
       fontSize: "3rem",
@@ -54,22 +53,22 @@ const theme = createTheme({
     h3: {
       fontSize: "2.5rem",
       fontWeight: 700,
-      '@media (max-width:600px)': {
-        fontSize: '1.5rem',
+      "@media (max-width:600px)": {
+        fontSize: "1.5rem",
       },
     },
     h4: {
       fontSize: "1.7rem",
       fontWeight: 700,
-      '@media (max-width:600px)': {
-        fontSize: '1.3rem',
+      "@media (max-width:600px)": {
+        fontSize: "1.3rem",
       },
     },
     h5: {
       fontSize: "1.2rem",
       fontWeight: 700,
-      '@media (max-width:600px)': {
-        fontSize: '1rem',
+      "@media (max-width:600px)": {
+        fontSize: "1rem",
       },
     },
     body: {
@@ -84,5 +83,70 @@ const theme = createTheme({
     lines: 999,
   },
 });
+
+export const theme2 = createTheme(theme, {
+  palette: {
+    primary: {
+      main: "#A10035",
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundImage: `url(/bg/theme2.jpg)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          fontFamily: '"Poppins", sans-serif',
+        },
+      },
+    },
+  },
+});
+
+export const theme3 = createTheme(theme, {
+  palette: {
+    primary: {
+      main: "#0078AA",
+
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundImage: `url(/bg/theme3.jpg)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          fontFamily: '"Poppins", sans-serif',
+        },
+      },
+    },
+  },
+});
+
+export const theme4 = createTheme(theme, {
+  palette: {
+    primary: {
+      main: "#FF9F29",
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundImage: `url(/bg/theme4.jpg)`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          fontFamily: '"Poppins", sans-serif',
+        },
+      },
+    },
+  },
+});
+
 
 export default theme;

@@ -21,6 +21,10 @@ export const validateAndSet= (
       ...pre,
       [event.target.name]: "Please input valid email !",
     }));
+    setValues((pre) => ({
+      ...pre,
+      [event.target.name]: event.target.value,
+    }));
     return;
   }
   if (

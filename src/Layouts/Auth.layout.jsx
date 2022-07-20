@@ -23,7 +23,7 @@ const AuthLayout = ({ children, mode }) => {
     mode === "Login" ? "Have not account yet ?" : "  Already have an account ?";
 
   const textForCaption = (
-    <Box component={"p"} sx={{ mt: 2 }}>
+    <Box component={"p"} sx={{ my: 2 }}>
       {text} <Link to={path}>{whereToGo} here</Link>
     </Box>
   );
@@ -68,6 +68,7 @@ const AuthLayout = ({ children, mode }) => {
               {mode === "Login" ? "Login" : "Sign up"}
             </Typography>
             {children}
+            
             {textForCaption}
           </Box>
         </Grid>
