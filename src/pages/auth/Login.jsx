@@ -37,7 +37,7 @@ const Login = () => {
         type: userTypes.Login,
         payload: data.user,
       });
-      console.log(data);
+     
       socket.emit("new-user", data.user.id);
       if (data.user.avatar) {
         navigate("/chat");
